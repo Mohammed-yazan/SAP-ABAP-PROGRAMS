@@ -1,0 +1,25 @@
+FUNCTION ZBAPI_FUNC2.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(BAPI_CUSTSTRT) TYPE  KNA1-KUNNR
+*"     VALUE(BAPI_CUSTEND) TYPE  KNA1-KUNNR
+*"  EXPORTING
+*"     VALUE(RETURN) TYPE  BAPIRET2
+*"  TABLES
+*"      BAPI_CUST STRUCTURE  ZBAPI_STRUCT
+*"  EXCEPTIONS
+*"      NOTFOUND
+*"----------------------------------------------------------------------
+
+SELECT KUNNR LAND1 NAME1 ORT01 PSTLZ TELF1
+  INTO TABLE BAPI_CUST FROM KNA1 WHERE KUNNR BETWEEN BAPI_CUSTSTRT AND BAPI_CUSTEND.
+IF SY-SUBRC NE 0.
+  RAISE NOTFOUND.
+ENDIF.
+
+
+
+
+
+ENDFUNCTION.
