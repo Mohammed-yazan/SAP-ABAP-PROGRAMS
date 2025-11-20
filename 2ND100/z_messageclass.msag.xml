@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>Z_MESSAGECLASS</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>MESSAGE CLASS FOR CLASSICAL REPORTS</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MESSAGECLASS</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>DATA NOT FOUND</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MESSAGECLASS</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>CUSTOMER NOT FOUND</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MESSAGECLASS</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>VENDOR NOT FOUND</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MESSAGECLASS</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>SALES NOT FOUND</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MESSAGECLASS</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>PURCHASE ORDER NOT FOUND</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MESSAGECLASS</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>MATERIALS NOT FOUND</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>
