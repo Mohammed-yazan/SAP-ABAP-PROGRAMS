@@ -1,0 +1,13 @@
+*&---------------------------------------------------------------------*
+*&  Include           Z_INCLUDE10
+*&---------------------------------------------------------------------*
+DATA: V1 TYPE EKKO-BEDAT.
+SELECTION-SCREEN BEGIN OF BLOCK B1 WITH FRAME TITLE T1.
+  PARAMETERS VENDOR TYPE EKKO-LIFNR.
+SELECTION-SCREEN END OF BLOCK B1.
+SELECTION-SCREEN BEGIN OF BLOCK B2 WITH FRAME TITLE T2.
+  SELECT-OPTIONS DATE FOR V1.
+SELECTION-SCREEN END OF BLOCK B2.
+INITIALIZATION.
+T1 = 'ENTER VENDOR NO'.
+T2 = 'ENTER DATE'.
