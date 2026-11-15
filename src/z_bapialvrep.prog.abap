@@ -1,0 +1,82 @@
+*&---------------------------------------------------------------------*
+*& Report Z_BAPIALVREP
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT Z_BAPIALVREP
+NO STANDARD PAGE HEADING
+MESSAGE-ID Z_MESSAGECLASS.
+DATA: V1 TYPE KNA1-KUNNR,
+      ITCUST TYPE TABLE OF ZBAPI_STRUCT.
+DATA RETURN TYPE BAPIRET2.
+DATA: IT_FCAT TYPE SLIS_T_FIELDCAT_ALV,
+      WA_FCAT TYPE SLIS_FIELDCAT_ALV.
+
+
+SELECTION-SCREEN BEGIN OF BLOCK B1.
+   SELECT-OPTIONS CUSTOMER FOR V1.
+SELECTION-SCREEN END OF BLOCK B1.
+
+START-OF-SELECTION.
+CALL FUNCTION 'ZBAPI_FUNC2'
+  EXPORTING
+    BAPI_CUSTSTRT       = CUSTOMER-LOW
+    BAPI_CUSTEND        = CUSTOMER-HIGH
+ IMPORTING
+   RETURN              = RETURN
+  TABLES
+    BAPI_CUST           = ITCUST.
+* EXCEPTIONS
+*   NOTFOUND            = 1
+*   OTHERS              = 2
+CASE SY-SUBRC.
+     WHEN 0.
+* FIELD 1: KUNNR
+    CLEAR WA_FCAT.
+    WA_FCAT-FIELDNAME = 'KUNNR'.
+    WA_FCAT-SELTEXT_M = 'CUSTOMER'.
+    APPEND WA_FCAT TO IT_FCAT.
+
+* FIELD 2: NAME1
+    CLEAR WA_FCAT.
+    WA_FCAT-FIELDNAME = 'NAME1'.
+    WA_FCAT-SELTEXT_M = 'NAME'.
+    APPEND WA_FCAT TO IT_FCAT.
+
+* FIELD 3: ORT01
+    CLEAR WA_FCAT.
+    WA_FCAT-FIELDNAME = 'ORT01'.
+    WA_FCAT-SELTEXT_M = 'CITY'.
+    APPEND WA_FCAT TO IT_FCAT.
+
+* FIELD 4: PSTLZ
+    CLEAR WA_FCAT.
+    WA_FCAT-FIELDNAME = 'PSTLZ'.
+    WA_FCAT-SELTEXT_M = 'POST CODE'.
+    APPEND WA_FCAT TO IT_FCAT.
+
+* FIELD 5: LAND1
+    CLEAR WA_FCAT.
+    WA_FCAT-FIELDNAME = 'LAND1'.
+    WA_FCAT-SELTEXT_M = 'COUNTRY'.
+    APPEND WA_FCAT TO IT_FCAT.
+
+* FIELD 6: TELF1
+    CLEAR WA_FCAT.
+    WA_FCAT-FIELDNAME = 'TELF1'.
+    WA_FCAT-SELTEXT_M = 'TELEPHONE'.
+    APPEND WA_FCAT TO IT_FCAT.
+
+       CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+          EXPORTING
+          I_GRID_TITLE                       = 'CUSTOMER INFO FROM KNA1'
+           IT_FIELDCAT                       = IT_FCAT
+         TABLES
+           T_OUTTAB                          = ITCUST.
+
+*        EXCEPTIONS
+*          PROGRAM_ERROR                     = 1
+*          OTHERS                            = 2
+     WHEN 4.
+       MESSAGE S001.
+ENDCASE.

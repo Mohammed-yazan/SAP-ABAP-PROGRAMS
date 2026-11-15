@@ -1,0 +1,40 @@
+*&---------------------------------------------------------------------*
+*& Report Z_ALVCLASSICALREP
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT Z_ALVCLASSICALREP
+NO STANDARD PAGE HEADING
+MESSAGE-ID Z_MESSAGECLASS.
+*DECLARATIONS.
+DATA: ITCUST TYPE TABLE OF KNA1.
+*INPUTS.
+INCLUDE: Z_KUNNR.
+*PROCESS.
+START-OF-SELECTION.
+PERFORM SUBR_OPENSQL.
+END-OF-SELECTION.
+*OUTPUT.
+CASE SY-SUBRC.
+     WHEN 0.
+       PERFORM SUBR_OUTPUT.
+     WHEN 4.
+       MESSAGE S001.
+ENDCASE.
+*SUBROUTINE FOR OPENSQL.
+FORM SUBR_OPENSQL .
+SELECT  NAME1
+       STRAS ORT01 PSTLZ
+       LAND1 TELF1
+       INTO TABLE ITCUST FROM KNA1
+       WHERE KUNNR IN CUSTOMER.
+ENDFORM.
+*SUBROUTINE FOR OUTPUT
+FORM SUBR_OUTPUT .
+CALL FUNCTION 'REUSE_ALV_LIST_DISPLAY'
+ EXPORTING
+   I_CALLBACK_PROGRAM            = SY-CPROG
+  I_STRUCTURE_NAME               = 'KNA1'
+  TABLES
+    T_OUTTAB                     = ITCUST.
+ENDFORM.

@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>WALEED FUNCTION GROUP</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZFUNCGRPPTOP</SOBJ_NAME>
+    <SOBJ_NAME>LZFUNCGRPPU05</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZFUNCGRPP</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>RFM_PODATA</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>REMOTE FUNCTION MODULE FOR PO DATA</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>RFM_LIFNR</PARAMETER>
+       <TYP>EKKO-LIFNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>RFM_ITEKKO</PARAMETER>
+       <DBSTRUCT>EKKO</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOTFOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>RFM_LIFNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vendor&apos;s account number</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RFM_ITEKKO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Purchasing Document Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOTFOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>VENDOR NUMBER NOT FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZBAPI_FUNC2</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>FUNCTION MODULE FOR CUSTOM BAPI</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>BAPI_CUSTSTRT</PARAMETER>
+       <TYP>KNA1-KUNNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>BAPI_CUSTEND</PARAMETER>
+       <TYP>KNA1-KUNNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>RETURN</PARAMETER>
+       <TYP>BAPIRET2</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>BAPI_CUST</PARAMETER>
+       <DBSTRUCT>ZBAPI_STRUCT</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOTFOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>BAPI_CUSTSTRT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Customer Number</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BAPI_CUSTEND</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Customer Number</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BAPI_CUST</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>CUSTOMER MASTER DATA</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOTFOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>VENDOR NOT FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZFOODORDERFM</FUNCNAME>
+     <SHORT_TEXT>FOOD MASTER DATA</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>FM_SALESID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODORDERR-SALESID</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>FM_CUSTNAME</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODORDERR-CUSTNAME</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FM_DISHNAME</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODORDERR-DISHNAME</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FM_QUANTITY</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODORDERR-QUANTITY</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FM_PRICE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODORDERR-PRICE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FM_CREATEDON</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODORDERR-CREATEDON</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FM_CREATEDAT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODORDERR-CREATEDAT</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>S</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+      </RSEXP>
+     </EXPORT>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOTFOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>FM_SALESID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SALES NO</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_CUSTNAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>CUSTOMER NAME</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_DISHNAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>DISH NAME</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_QUANTITY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>FOOD QUANTITY</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_PRICE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>FOOD PRICE</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_CREATEDON</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>CREATED DATE</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_CREATEDAT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>CREATED ON TIME</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>S</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOTFOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>CUSTOMER DATA NOT FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZFUNCMODD</FUNCNAME>
+     <SHORT_TEXT>VENDOR INFORMATION FROM LFA1</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>FM_LIFNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LFA1-LIFNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>FM_NAME1</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LFA1-NAME1</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FM_PSTLZ</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LFA1-PSTLZ</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FM_LAND1</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LFA1-LAND1</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FM_TELF1</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LFA1-TELF1</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FM_ORT01</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LFA1-ORT01</TYP>
+      </RSEXP>
+     </EXPORT>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOTFOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>FM_LIFNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Account Number of Vendor or Creditor</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_NAME1</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Name 1</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_PSTLZ</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Postal Code</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_LAND1</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Country Key</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_TELF1</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>First telephone number</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_ORT01</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>City</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOTFOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>VENDOR NUMBER NOT FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZPURCHASEORDERFM</FUNCNAME>
+     <SHORT_TEXT>PURCHASE ORDER HEADER DATA</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>FM_EBELN</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>EKKO-EBELN</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>FM_EKKO</PARAMETER>
+       <DBFIELD>EKKO</DBFIELD>
+       <REFERENCE>X</REFERENCE>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FM_LFA1</PARAMETER>
+       <DBFIELD>LFA1</DBFIELD>
+       <REFERENCE>X</REFERENCE>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>FM_EKPO</PARAMETER>
+       <DBSTRUCT>EKPO</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOTFOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>FM_EBELN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Purchasing Document Number</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_EKKO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Purchasing Document Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_LFA1</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vendor Master (General Section)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FM_EKPO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Purchasing Document Item</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOTFOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>PURCHASE ORDER DATA NOT FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,208 @@
+*&---------------------------------------------------------------------*
+*& Report Z_BLOCKREP2
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT Z_BLOCKREP2
+NO STANDARD PAGE HEADING
+MESSAGE-ID Z_MESSAGECLASS.
+*DECLARATIONS.
+TYPES: BEGIN OF TYPE1,
+       VBELN TYPE VBAK-VBELN,
+       NETWR TYPE VBAK-NETWR,
+       WAERK TYPE VBAK-WAERK,
+       END OF TYPE1.
+DATA:  ITAB1 TYPE TABLE OF TYPE1.
+TYPES: BEGIN OF TYPE2,
+       VBELN TYPE VBAP-VBELN,
+       POSNR TYPE VBAP-POSNR,
+       MATNR TYPE VBAP-MATNR,
+       MATKL TYPE VBAP-MATKL,
+       END OF TYPE2.
+DATA: ITAB2 TYPE TABLE OF TYPE2.
+TYPES: BEGIN OF TYPE3,
+       MATNR TYPE MARA-MATNR,
+       MTART TYPE MARA-MTART,
+       MEINS TYPE MARA-MEINS,
+       MATKL TYPE MARA-MATKL,
+       END OF TYPE3.
+DATA: ITAB3 TYPE TABLE OF TYPE3.
+
+
+*TYPE POOLS DECLARATIONS.
+TYPE-POOLS : SLIS.
+
+*FIELDCAT LOGS.
+DATA : IT_FCAT TYPE SLIS_T_FIELDCAT_ALV,
+       WA_FCAT LIKE LINE OF IT_FCAT.
+DATA : IT_FCAT1 TYPE SLIS_T_FIELDCAT_ALV,
+       WA_FCAT1 LIKE LINE OF IT_FCAT1.
+DATA : IT_FCAT2 TYPE SLIS_T_FIELDCAT_ALV,
+       WA_FCAT2 LIKE LINE OF IT_FCAT2.
+*EVENTS
+DATA : IT_EVENT TYPE SLIS_T_EVENT,
+       IT_EVENT1 TYPE SLIS_T_EVENT,
+       IT_EVENT2 TYPE SLIS_T_EVENT.
+
+*LAYOUT.
+DATA : LAYOUT1 TYPE SLIS_LAYOUT_ALV,
+       LAYOUT2 TYPE SLIS_LAYOUT_ALV,
+       LAYOUT3 TYPE SLIS_LAYOUT_ALV.
+
+*INPUTS.
+DATA  V1 TYPE VBAK-VBELN.
+SELECTION-SCREEN BEGIN OF BLOCK B1 WITH FRAME.
+      SELECT-OPTIONS : SALESORD FOR V1.
+SELECTION-SCREEN END OF BLOCK B1.
+*PROCESS.
+START-OF-SELECTION.
+SELECT VBELN NETWR WAERK INTO TABLE ITAB1 FROM VBAK WHERE VBELN IN SALESORD.
+ IF NOT ITAB1 IS  INITIAL.
+   SELECT VBELN POSNR MATNR MATKL
+      INTO TABLE ITAB2 FROM VBAP
+      FOR ALL ENTRIES IN ITAB1
+      WHERE VBELN EQ ITAB1-VBELN.
+ IF NOT ITAB2 IS INITIAL.
+   SELECT MATNR MTART MEINS MATKL INTO TABLE ITAB3 FROM MARA FOR ALL ENTRIES IN ITAB2 WHERE MATNR EQ ITAB2-MATNR.
+ENDIF.
+ENDIF.
+IF ITAB1 IS INITIAL.
+  MESSAGE S003.
+ELSE.
+  PERFORM SUBR_FCAT.
+  PERFORM SUBR_OUTPUT.
+ENDIF.
+END-OF-SELECTION.
+*&---------------------------------------------------------------------*
+*&      Form  SUBR_FCAT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM SUBR_FCAT .
+
+WA_FCAT-FIELDNAME = 'VBELN'.
+ WA_FCAT-COL_POS = '1'.
+ WA_FCAT-SELTEXT_M = 'SALES.ORD.NO'.
+ APPEND WA_FCAT TO IT_FCAT.
+ CLEAR WA_FCAT.
+
+ WA_FCAT-FIELDNAME = 'NETWR'.
+ WA_FCAT-COL_POS = '2'.
+ WA_FCAT-SELTEXT_M = 'NET.VALUE'.
+ APPEND WA_FCAT TO IT_FCAT.
+ CLEAR WA_FCAT.
+
+ WA_FCAT-FIELDNAME = 'WAERK'.
+ WA_FCAT-COL_POS = '3'.
+ WA_FCAT-SELTEXT_M = 'CURRENCY'.
+ APPEND WA_FCAT TO IT_FCAT.
+ CLEAR WA_FCAT.
+
+
+  WA_FCAT1-FIELDNAME = 'VBELN'.
+ WA_FCAT1-COL_POS = '1'.
+ WA_FCAT1-SELTEXT_M = 'SALES.ORD.NO'.
+ APPEND WA_FCAT1 TO IT_FCAT1.
+ CLEAR WA_FCAT1.
+
+ WA_FCAT1-FIELDNAME = 'POSNR'.
+ WA_FCAT1-COL_POS = '2'.
+ WA_FCAT1-SELTEXT_M = 'ITEM'.
+ APPEND WA_FCAT1 TO IT_FCAT1.
+ CLEAR WA_FCAT1.
+
+ WA_FCAT1-FIELDNAME = 'MATNR'.
+ WA_FCAT1-COL_POS = '3'.
+ WA_FCAT1-SELTEXT_M = 'MATERIAL.NO'.
+ APPEND WA_FCAT1 TO IT_FCAT1.
+ CLEAR WA_FCAT1.
+
+ WA_FCAT1-FIELDNAME = 'MATKL'.
+ WA_FCAT1-COL_POS = '4'.
+ WA_FCAT1-SELTEXT_M = 'MATERIAL.GROUP'.
+ APPEND WA_FCAT1 TO IT_FCAT1.
+ CLEAR WA_FCAT1.
+
+
+  WA_FCAT2-FIELDNAME = 'MATNR'.
+ WA_FCAT2-COL_POS = '1'.
+ WA_FCAT2-SELTEXT_M = 'MATERIAL.NO'.
+ APPEND WA_FCAT2 TO IT_FCAT2.
+ CLEAR WA_FCAT2.
+
+ WA_FCAT2-FIELDNAME = 'MTART'.
+ WA_FCAT2-COL_POS = '2'.
+ WA_FCAT2-SELTEXT_M = 'MATERIAL.TYPE'.
+ APPEND WA_FCAT2 TO IT_FCAT2.
+ CLEAR WA_FCAT2.
+
+ WA_FCAT2-FIELDNAME = 'MEINS'.
+ WA_FCAT2-COL_POS = '3'.
+ WA_FCAT2-SELTEXT_M = 'UNIT.OF.MEASURES'.
+ APPEND WA_FCAT2 TO IT_FCAT2.
+ CLEAR WA_FCAT2.
+
+ WA_FCAT2-FIELDNAME = 'MATKL'.
+ WA_FCAT2-COL_POS = '4'.
+ WA_FCAT2-SELTEXT_M = 'MATERIAL.GROUP'.
+ APPEND WA_FCAT2 TO IT_FCAT2.
+ CLEAR WA_FCAT2.
+
+
+
+
+ENDFORM.
+*&---------------------------------------------------------------------*
+*&      Form  SUBR_OUTPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM SUBR_OUTPUT .
+  CALL FUNCTION 'REUSE_ALV_BLOCK_LIST_INIT'
+    EXPORTING
+      I_CALLBACK_PROGRAM             = SY-CPROG.
+
+  CALL FUNCTION 'REUSE_ALV_BLOCK_LIST_APPEND'
+    EXPORTING
+      IS_LAYOUT                        = LAYOUT1
+      IT_FIELDCAT                      = IT_FCAT
+      I_TABNAME                        = 'ITAB1'
+      IT_EVENTS                        = IT_EVENT
+    TABLES
+      T_OUTTAB                         = ITAB1.
+
+  CALL FUNCTION 'REUSE_ALV_BLOCK_LIST_APPEND'
+    EXPORTING
+      IS_LAYOUT                        = LAYOUT2
+      IT_FIELDCAT                      = IT_FCAT1
+      I_TABNAME                        = 'ITAB2'
+      IT_EVENTS                        = IT_EVENT1
+    TABLES
+      T_OUTTAB                         = ITAB2.
+
+
+  CALL FUNCTION 'REUSE_ALV_BLOCK_LIST_APPEND'
+    EXPORTING
+      IS_LAYOUT                        = LAYOUT2
+      IT_FIELDCAT                      = IT_FCAT2
+      I_TABNAME                        = 'ITAB3'
+      IT_EVENTS                        = IT_EVENT2
+    TABLES
+      T_OUTTAB                         = ITAB3.
+
+  CALL FUNCTION 'REUSE_ALV_BLOCK_LIST_DISPLAY'
+   EXCEPTIONS
+     PROGRAM_ERROR                 = 1
+     OTHERS                        = 2.
+  IF SY-SUBRC <> 0.
+    MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+              WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+  ENDIF.
+
+ENDFORM.
